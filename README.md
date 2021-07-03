@@ -96,7 +96,7 @@ docker run -it --rm --name ggr your-ggr-tag preprocess.py -h
 ```
 - **Python mode**
 ```console
-python preprocess.py -h # python mode
+python preprocess.py -h
 ```
 ```
 usage: preprocess.py [-h] [-V] [-f FORMAT [FORMAT ...]] [-s SIZE [SIZE ...]]
@@ -123,7 +123,7 @@ docker run -it --rm --name ggr your-ggr-tag recon.py -h
 ```
 - **Python mode**
 ```console
-python recon.py -h # python mode
+python recon.py -h
 ```
 ```
 usage: recon.py [-h] [-V] [--ggr | --tik] [-w REG_WEIGHT]
