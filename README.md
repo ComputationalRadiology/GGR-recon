@@ -8,12 +8,15 @@ A deconvolution-based MRI super-resolution reconstruction method with a gradient
 The reconstruction comprises two steps: 1) ***preprocessing*** and 2) ***deconvolution***, corresponding to the two python scripts, respectively, ***preprocess.py*** and ***recon.py***. In the preprocessing step, the algorithm deals with image alignment for motion compensation, computes automatically the geometric properties of the high-res reconstruction, creates the filters (for slice profiles and downsamplings) used in the deconvolution step, and offers a gradient guidance reference for the regularization of the deconvolution. The preporcessing also provides a resampling mode, which is usually used to determine the geometric properties of the high-res reconstruction manually. In the deconvolution step, the regularization is created and then the regularized deconvolution is performed in the Fourier domain.
 
 ## Dependencies
+### Docker mode
+- **Docker**: https://www.docker.com/ (If run with docker)
+
+### Python mode
 - **NumPy**: https://numpy.org/
 - **Scipy**: https://www.scipy.org/
 - **SimpleITK**: https://simpleitk.org/
 - **Rich**: https://rich.readthedocs.io/en/stable/introduction.html
 - **CRKIT**: http://crl.med.harvard.edu/software/
-- **Docker**: https://www.docker.com/ (If run with docker)
 
 ## Getting started
 GGR-recon can be run in either ***docker*** or ***python*** mode. We *strongly* recommend using GGR-recon in the ***docker*** mode, as the issues about the environment configuration and version conflicts can be maximally mitigated.
@@ -87,8 +90,12 @@ export DYLD_LIBRARY_PATH=""
 
 ## Usage
 ### View help
+- **Docker model**
 ```console
-docker run -it --rm --name ggr your-ggr-tag preprocess.py -h # docker mode
+docker run -it --rm --name ggr your-ggr-tag preprocess.py -h
+```
+- **Python mode**
+```console
 python preprocess.py -h # python mode
 ```
 ```
@@ -110,8 +117,12 @@ optional arguments:
                         lattice and then exit. Usually used for determining a
                         user defined size of the high-res reconstruction
 ```
+- **Docker model**
 ```console
-docker run -it --rm --name ggr your-ggr-tag recon.py -h # docker mode
+docker run -it --rm --name ggr your-ggr-tag recon.py -h
+```
+- **Python mode**
+```console
 python recon.py -h # python mode
 ```
 ```
