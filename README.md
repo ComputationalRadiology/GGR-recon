@@ -153,7 +153,7 @@ docker run -it --rm --name ggr-recon \
   your-ggr-tag preprocess.py
 ```
 
-Another example is to run in the docker mode the **deconvolution** step with the GGR regularization that weighted by 0.03
+Another example is to run in the docker mode the **deconvolution** step with the GGR regularization that is weighted by 0.03
 ```console
 docker run -it --rm --name ggr-recon \
   -v /your/data/folder:/opt/GGR-recon/data \
