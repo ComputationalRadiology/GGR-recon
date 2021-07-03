@@ -105,7 +105,7 @@ GGR-recon requires the input low-res images to be put at the folder of name *dat
 ```
 The intermediate and final results are placed in the folders of *working* and *recons*, respectively, which are created by GGR-recon itself. In the docker mode, these folders are required to be mounted as well to receive the results, similar to the input folder.
 
-For instance, running the **preprocessing** step with the defaults setting in the docker mode can be accomplished by
+For instance, running the **preprocessing** step with the default setting in the docker mode can be accomplished by
 ```console
 docker run -it --rm --name ggr-recon \
   -v /your/data/folder:/opt/GGR-recon/data \
