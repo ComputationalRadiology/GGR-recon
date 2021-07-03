@@ -51,11 +51,11 @@ export DYLD_LIBRARY_PATH=""
 
 ## Usage
 ### View help
-- **Docker model**
+#### Docker mode
 ```console
 docker run -it --rm --name ggr your-ggr-tag preprocess.py -h
 ```
-- **Python mode**
+#### Python mode
 ```console
 python preprocess.py -h
 ```
@@ -78,11 +78,11 @@ optional arguments:
                         lattice and then exit. Usually used for determining a
                         user defined size of the high-res reconstruction
 ```
-- **Docker model**
+#### Docker mode
 ```console
 docker run -it --rm --name ggr your-ggr-tag recon.py -h
 ```
-- **Python mode**
+#### Python mode
 ```console
 python recon.py -h
 ```
@@ -130,7 +130,7 @@ In the **deconvolution** step, a total variation (TV) regularization is also imp
 ### Data acquisition protocol
 We recommend acquiring three low-res images in the three complementary planes respectively. Each low-res image comprises high in-plane resolution and thick slices. For example, we acquire T2 TSE images with an in-plane resolution of 0.5mm x 0.5mm and thickness of 2mm, and reconstruct the high-res image at the isotropic resolution of 0.5mm. It takes two minutes to acquire such an image on our scanner. With this protocol, GGR-recon never enhances in-plane resoltuion but reduces slice thickness.
 
-#### Configure docker environment
+### Configure docker environment
 The configuration for docker is mainly about the proxy setting. The proxy needs to be set by two steps: 1) declare in the Dockerfile and 2) set in the system level.
 
 In the *Dockerfile*, add the environment variables by
