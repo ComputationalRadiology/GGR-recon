@@ -9,7 +9,7 @@ The reconstruction comprises two steps: 1) ***preprocessing*** and 2) ***deconvo
 
 ## Dependencies
 ### Docker mode
-- **Docker**: https://www.docker.com/ (If run with docker)
+- **Docker**: https://www.docker.com/
 
 ### Python mode
 - **NumPy**: https://numpy.org/
