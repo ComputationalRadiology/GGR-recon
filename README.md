@@ -22,46 +22,7 @@ The reconstruction comprises two steps: 1) ***preprocessing*** and 2) ***deconvo
 GGR-recon can be run in either ***docker*** or ***python*** mode. We *strongly* recommend using GGR-recon in the ***docker*** mode, as the issues about the environment configuration and version conflicts can be maximally mitigated.
 
 ### Docker mode
-#### Configure docker environment
-The configuration for docker is mainly about the proxy setting. The proxy needs to be set by two steps: 1) declare in the Dockerfile and 2) set in the system level.
-
-In the *Dockerfile*, add the environment variables by
-```Docker
-ENV http_proxy "http://your.proxy.edu:3128"
-ENV no_proxy "127.0.0.1,localhost"
-```
-For the system level configuration, edit the file */etc/systemd/system/docker.service.d/http-proxy.conf* and insert the following lines
-```
-[Service]
-Environment="HTTP_PROXY=http://your.proxy.edu:3128"
-Environment="NO_PROXY=localhost,127.0.0.1"
-```
-Flush changes and restart Docker
-```console
- sudo systemctl daemon-reload
- sudo systemctl restart docker
-```
-Verify that the configuration has been loaded and matches the changes you made, for example:
-```console
-sudo systemctl show --property=Environment docker
-```
-```
-Environment=HTTP_PROXY=http://your.proxy.edu:3128 NO_PROXY=localhost,127.0.0.1
-```
-
-The proxy setting can also be set in the file *~/.docker/config.json* with the following lines
-```js
-{
-  "proxies":
-  {
-    "default":
-    {
-      "httpProxy": "http://your.proxy.edu:3128",
-      "noProxy": "127.0.0.1,localhost"
-    }
-  }
-}
-```
+If you are using a proxy in your network, you need to configure your docker enviroment with the proxy. The configuration is presented in the Appendix section below. If not, you could directly build the docker image and use it with docker.
 
 #### Build docker image
 ```console
@@ -165,8 +126,50 @@ docker run -it --rm --name ggr-recon \
 ### Baseline implementation
 In the **deconvolution** step, a total variation (TV) regularization is also implemented with the Tikhonov criterion, for the comparison to our gradient guidance regularization (GGR). To enable the TV regularization instead of GGR, use the option *--tik* when running *recon.py*
 
-## Appendix: Data acquisition protocol
+## Appendix
+### Data acquisition protocol
 We recommend acquiring three low-res images in the three complementary planes respectively. Each low-res image comprises high in-plane resolution and thick slices. For example, we acquire T2 TSE images with an in-plane resolution of 0.5mm x 0.5mm and thickness of 2mm, and reconstruct the high-res image at the isotropic resolution of 0.5mm. It takes two minutes to acquire such an image on our scanner. With this protocol, GGR-recon never enhances in-plane resoltuion but reduces slice thickness.
+
+#### Configure docker environment
+The configuration for docker is mainly about the proxy setting. The proxy needs to be set by two steps: 1) declare in the Dockerfile and 2) set in the system level.
+
+In the *Dockerfile*, add the environment variables by
+```Docker
+ENV http_proxy "http://your.proxy.edu:3128"
+ENV no_proxy "127.0.0.1,localhost"
+```
+For the system level configuration, edit the file */etc/systemd/system/docker.service.d/http-proxy.conf* and insert the following lines
+```
+[Service]
+Environment="HTTP_PROXY=http://your.proxy.edu:3128"
+Environment="NO_PROXY=localhost,127.0.0.1"
+```
+Flush changes and restart Docker
+```console
+ sudo systemctl daemon-reload
+ sudo systemctl restart docker
+```
+Verify that the configuration has been loaded and matches the changes you made, for example:
+```console
+sudo systemctl show --property=Environment docker
+```
+```
+Environment=HTTP_PROXY=http://your.proxy.edu:3128 NO_PROXY=localhost,127.0.0.1
+```
+
+The proxy setting can also be set in the file *~/.docker/config.json* with the following lines
+```js
+{
+  "proxies":
+  {
+    "default":
+    {
+      "httpProxy": "http://your.proxy.edu:3128",
+      "noProxy": "127.0.0.1,localhost"
+    }
+  }
+}
+```
 
 ## References
   1. Yao Sui, Onur Afacan, Ali Gholipour, and Simon K. Warfield. 2019. “**Isotropic MRI Super-Resolution Reconstruction with Multi-Scale Gradient Field Prior**.” *International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI)*. Shen Zhen, China. <a href="https://scholar.harvard.edu/files/suiyao/files/sui_miccai_2019.pdf">PDF</a>
