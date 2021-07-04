@@ -73,7 +73,7 @@ def resample_img_like(img, ref):
 	r.SetSize(ref.GetSize())
 	return r.Execute(img)
 
-def dubm_update(task, advance):
+def dumb_update(task, advance):
 	pass
 
 def recon_tik(y, w, tv_weight=0.1, progress=None, task=None):
@@ -81,7 +81,7 @@ def recon_tik(y, w, tv_weight=0.1, progress=None, task=None):
 	if progress != None and task!=None:
 		update_progress = progress.update
 	else:
-		update_progress = dubm_update
+		update_progress = dumb_update
 
 	d, n, m, n_imgs_per_echo = y.shape
 	dx = np.zeros([d,n,m])
