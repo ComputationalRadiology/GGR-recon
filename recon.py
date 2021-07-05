@@ -134,7 +134,7 @@ with progress:
 	img_x = np_to_img(x, mean_img)
 	imwrite(img_x, out_fn)
 	
-	update_progress(task, '[green bold]Complete! :ok_hand:', advance=5)
+	update_progress(task, '[green bold]Completed! :ok_hand:', advance=5)
 
 rainbow = RainbowHighlighter()
 console.print('\n')
