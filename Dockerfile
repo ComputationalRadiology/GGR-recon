@@ -26,7 +26,6 @@ RUN apt-get install -y python3.9-distutils
 
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 RUN python get-pip.py
-RUN python -m pip --version
 
 COPY requirements.txt /tmp/requirements.txt
 RUN python -m pip install -r /tmp/requirements.txt
