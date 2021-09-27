@@ -94,7 +94,7 @@ for ii in range(0, n_imgs):
 #print('\t- make the orientations the same for all LR images')
 
 # step 1: resample the images
-img0 = imread(path + img_fn[0] + img_ext[0])
+img0 = imread(working_path + img_fn[0] + img_ext[0])
 if sz == None:
 	img0x = resample_iso_img(img0)
 	sz = img0x.GetSize()
@@ -141,7 +141,7 @@ lr_spacing = np.zeros([3, n_imgs])
 lr_size[:,0] = np.array(img0.GetSize(), dtype=np.int64)
 lr_spacing[:,0] = np.array(img0.GetSpacing())
 for ii in track(range(1, n_imgs), '[yellow]Resampling images...'):
-	img = imread(path + img_fn[ii] + img_ext[ii])
+	img = imread(working_path + img_fn[ii] + img_ext[ii])
 	lr_spacing[:,ii] = np.array(img.GetSpacing())
 	lr_size[:,ii] = np.array(img.GetSize())
 

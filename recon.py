@@ -109,7 +109,12 @@ with progress:
 		
 		update_progress(task, '[green]Loading images...', advance=20/n_imgs)
 	
-	mean_fn = glob.glob(out_path + 'img_mean.*')[0]
+	mean_fns = glob.glob(out_path + 'img_mean.*')
+	if len(mean_fns) > 1:
+		console.print('[red bold]Error: Please check you "recons" folder to make sure there is only [i][u]ONE[/u][/i] file named "img_mean", and then run [i]recon.py[/i] again.')
+		exit()
+
+	mean_fn = mean_fns[0]
 	ext = mean_fn[len(out_path + 'img_mean'):]
 	
 	mean_img = imread(mean_fn)
