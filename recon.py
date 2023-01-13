@@ -131,8 +131,10 @@ with progress:
 				tv_weight=reg_weight, progress=progress, task=task)
 		out_fn = out_path + 'recon_tik-w' + str(reg_weight) + ext
 	
-	x = np.clip(ifftn(fft_x).real.astype(np.float32), 0, None)
+	#x = np.clip(ifftn(fft_x).real.astype(np.float32), 0, None)
 	#x = np.abs(ifftn(fft_x)).astype(np.float32)
+	x = ifftn(fft_x).real.astype(np.float32)
+
 	
 	update_progress(task, '[yellow]Saving image...', advance=5)
 	
