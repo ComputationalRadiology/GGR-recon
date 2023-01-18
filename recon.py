@@ -32,6 +32,9 @@ group.add_argument('--tik', action='store_true',
 parser.add_argument('-w', '--reg-weight',
 		help='weight of the regularization, by default is 0.1',
 		type=float, default=0.1)
+parser.add_argument('--keep-negative-values', action='store_true',
+		help='keep negative voxel values in the reconstructed image, by default is false',
+		default=False)
 args = parser.parse_args()
 
 reg_weight = args.reg_weight
@@ -40,6 +43,7 @@ reg_desc = 'GGR'
 if args.tik:
 	reg = 0 # 'tik'
 	reg_desc = 'Tikhonov'
+keep_negative_values = args.keep_negative_values
 
 path = './data/'
 working_path = './working/'
@@ -133,8 +137,10 @@ with progress:
 	
 	#x = np.clip(ifftn(fft_x).real.astype(np.float32), 0, None)
 	#x = np.abs(ifftn(fft_x)).astype(np.float32)
-	x = ifftn(fft_x).real.astype(np.float32)
-
+	if keep_negative_values:
+		x = ifftn(fft_x).real.astype(np.float32)
+	else:
+		x = np.clip(ifftn(fft_x).real.astype(np.float32), 0, None)
 	
 	update_progress(task, '[yellow]Saving image...', advance=5)
 	
