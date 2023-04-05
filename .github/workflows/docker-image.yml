@@ -19,9 +19,8 @@ jobs:
       run: |
         docker build . --file Dockerfile --tag ggr-recon:$(date +%s)
         docker save ggr-recon:$(date +%s) -o gg-recon-$(date +%s).tar
-
       
     - uses: actions/upload-artifact@v3
       with:
-      name: ggr-recon-$(date +%s).tar
-      path: ggr-recon-$(date +%s).tar
+        name: ggr-recon-$(date +%s).tar
+        path: ggr-recon-$(date +%s).tar
