@@ -14,13 +14,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Set current date
+      id: date
+      run: echo "NOW=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile --tag ggr-recon:${{ github.event.repository.updated_at}}
-        docker save ggr-recon:${{ github.event.repository.updated_at}} -o ggr-recon-${{ github.event.repository.updated_at}}.tar
+        docker build . --file Dockerfile --tag ggr-recon:${NOW}
+        docker save ggr-recon:${NOW} -o ggr-recon-${NOW}.tar
       
     - uses: actions/upload-artifact@v3
       with:
         name: ggr-recon-container
-        path: ggr-recon-${{ github.event.repository.updated_at}}.tar
+        path: ggr-recon-${NOW}.tar
