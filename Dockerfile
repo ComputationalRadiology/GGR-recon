@@ -50,4 +50,6 @@ COPY utils.py /opt/GGR-recon
 COPY preprocess.py /opt/GGR-recon
 COPY recon.py /opt/GGR-recon
 
-ENTRYPOINT cd /opt/GGR-recon && python $0 $@
+WORKDIR /opt/GGR-recon
+
+ENTRYPOINT cd /opt/GGR-recon && python3 $0 $@
