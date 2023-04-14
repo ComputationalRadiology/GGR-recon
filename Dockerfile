@@ -5,8 +5,22 @@ ARG DEBIAN_FRONTEND=noninteractive
 LABEL vendor="Computational Radiology Laboratory"
 LABEL vendor="crl.med.harvard.edu"
 
-RUN apt-get update -y && \
-        apt-get install -y wget \
+# Update the ubuntu.
+RUN apt-get -y update && \
+    apt-get -y upgrade
+
+# FIX THE MISSING LOCALE in ubuntu
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y locales \
+    && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
+    && dpkg-reconfigure --frontend=noninteractive locales \
+    && update-locale LANG=en_US.UTF-8
+
+ENV LANGUAGE=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+ENV LANG=en_US.UTF-8 
+ENV LC_TYPE=en_US.UTF-8
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y wget \
         curl vim nano zip
 
 # install CRKIT
