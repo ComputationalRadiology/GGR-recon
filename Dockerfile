@@ -52,4 +52,8 @@ COPY recon.py /opt/GGR-recon
 
 WORKDIR /opt/GGR-recon
 
-ENTRYPOINT cd /opt/GGR-recon && python3 $0 $@
+# DEFAULT CMD provides a list of programs.
+ENV msg="\nRun one of these programs:\n"
+CMD echo $msg; find /opt/GGR-recon/ -type f -name "*.py"; echo $msg
+
+
