@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import numpy as np
 import SimpleITK as sitk
 from numpy.fft import fftn, ifftn
