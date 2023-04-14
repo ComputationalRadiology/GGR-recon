@@ -49,6 +49,9 @@ RUN mkdir -p /opt/GGR-recon
 COPY utils.py /opt/GGR-recon
 COPY preprocess.py /opt/GGR-recon
 COPY recon.py /opt/GGR-recon
+ENV PATH ${PATH}:/opt/GGR-recon
+RUN chmod a+rx /opt/GGR-recon/preprocess.py
+RUN chmod a+rx /opt/GGR-recon/recon.py
 
 WORKDIR /opt/GGR-recon
 
