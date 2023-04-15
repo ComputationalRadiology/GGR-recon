@@ -24,7 +24,7 @@ jobs:
         docker build . --file Dockerfile --tag ggr-recon:${{ steps.date.outputs.NOW }}
         docker save ggr-recon:${{ steps.date.outputs.NOW }} -o ggr-recon-${{ steps.date.outputs.NOW }}.tar
         docker tag ggr-recon:${{ steps.date.outputs.NOW }} ggr-recon:latest
-        docker build ggr-gear --file ggr-gear/Dockerfile --tag ggr-recon-gear:${{ steps.date.outputs.NOW }}
+        docker build . --file ggr-gear/Dockerfile --tag ggr-recon-gear:${{ steps.date.outputs.NOW }}
         docker save ggr-recon-gear:${{ steps.date.outputs.NOW }} -o ggr-recon-gear:${{ steps.date.outputs.NOW }}.tar
       
     - uses: actions/upload-artifact@v3
