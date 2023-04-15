@@ -1,8 +1,8 @@
 # Final stage of build: create a gear for Flywheel.
 #FROM crkit AS crkit-gear
 
-#Inherit  ggr-docker
-FROM ggr-docker:latest AS reconstruction
+#Inherit  ggr-recon
+FROM ggr-recon:latest AS reconstruction
 
 
 #COPY --from=reconstruction
