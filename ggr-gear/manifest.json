@@ -2,7 +2,7 @@
     "name": "ggr-gear",
     "label": "Gradient Guidance Regularization Gear",
     "description": "A deconvolution-based MRI super-resolution reconstruction method with a gradient guidance regularization (GGR) gear",
-    "version": "1.0.1",
+    "version": "1.0.0_1.0.4",
     "author":  "Yao Sui, gear: Nick Leung",
     "maintainer":  "Nick Leung",
     "cite":  "",
