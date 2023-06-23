@@ -53,9 +53,9 @@ if np.any([not fmt.startswith('.') for fmt in fn_ext]):
 	print('Error: each element of FORMAT should start with .(dot)')
 	exit()
 
-path = './data/'
-working_path = './working/'
-out_path = './recons/'
+path = '/opt/GGR-recon/data/'
+working_path = '/opt/GGR-recon/working/'
+out_path = '/opt/GGR-recon/recons/'
 
 if not os.path.isdir(path):
 	print('Low-res images should be put in ./data')
