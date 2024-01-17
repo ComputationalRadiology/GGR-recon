@@ -47,9 +47,9 @@ if args.tik:
 	reg_desc = 'Tikhonov'
 keep_negative_values = args.keep_negative_values
 
-path = './data/'
-working_path = './working/'
-out_path = './recons/'
+path = '/opt/GGR-recon/data/'
+working_path = '/opt/GGR-recon/working/'
+out_path = '/opt/GGR-recon/recons/'
 
 if not os.path.isdir(out_path):
 	os.mkdir(out_path)
