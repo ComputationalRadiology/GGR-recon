@@ -1,5 +1,4 @@
 FROM ubuntu:20.04
-# ENV http_proxy "http://proxy.tch.harvard.edu:3128"
 ARG DEBIAN_FRONTEND=noninteractive
 
 LABEL vendor="Computational Radiology Laboratory"

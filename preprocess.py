@@ -104,7 +104,7 @@ else:
 	img0x = resample_iso_img_with_size(img0, sz)
 
 # =========== Print summary of the execution =============
-mode = 'Preprecessing'
+mode = 'Preprocessing'
 if resample_only:
 	mode = 'Resampling'
 table = Table(title='Summary of %s/preprocess.py execution' % app_name,
@@ -213,7 +213,7 @@ for ii in track(range(0, n_imgs), '[cyan]Creating filters...'):
 	savemat(working_path+'h_'+img_fn[ii]+'.mat', {'fft_win': fft_win})
 
 #print('completed step 3')
-#print('\t- create fitlers for deconvolution')
+#print('\t- create filters for deconvolution')
 
 # step 4: volume fusion
 z = sitk.GetArrayFromImage(img0x)
@@ -232,7 +232,7 @@ imwrite(img_z, out_path + 'img_mean' + img_ext[0])
 #print('completd step 4')
 #print('\t- volume fusion')
 
-rainbow = RainbowHighlighter()
+# rainbow = RainbowHighlighter()
 console.print('\n')
-console.print(rainbow('ALL THE PRE-PRECESSINGS HAVE BEEN COMPLATED'))
+console.print('THE PRE-PROCESSING HAS BEEN COMPLETED.')
 console.print('\n')

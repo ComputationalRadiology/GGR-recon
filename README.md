@@ -171,6 +171,18 @@ Then, build your docker image with the proxy arguemnt by
 docker build --build-arg http_proxy=http://your.proxy.edu:3128 -t your-ggr-tag .
 ```
 
+or build your docker image with the build computer network:
+```
+docker build --network=host  -t crl/ggr-recon .
+```
+
+
+Build command without proxy:
+```
+docker build  -t crl/ggr-recon .
+```
+
+
 ## References
   1. Yao Sui, Onur Afacan, Ali Gholipour, and Simon K. Warfield. 2019. “**Isotropic MRI Super-Resolution Reconstruction with Multi-Scale Gradient Field Prior**.” *International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI)*. Shen Zhen, China. <a href="https://scholar.harvard.edu/files/suiyao/files/sui_miccai_2019.pdf">PDF</a>
   2. Yao Sui, Onur Afacan, Ali Gholipour, and Simon K. Warfield. 2020. “**Learning a Gradient Guidance for Spatially Isotropic MRI Super-Resolution Reconstruction**.” *International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI)*. Lima, Peru. <a href="https://scholar.harvard.edu/files/suiyao/files/sui_deepgg_miccai_2020.pdf">PDF</a>
