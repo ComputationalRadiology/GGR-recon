@@ -26,7 +26,7 @@ parser.add_argument('-f', '--format', nargs='+', default='.nii.gz',
 				e.g., -f .nhdr .nrrd .nii .nii.gz')
 parser.add_argument('-s', '--size', nargs='+', type=int,
 		help='size of the high-res reconstruction, optional; \
-				3 positive integers (sagittal coronal axial) \
+				3 even positive integers (sagittal coronal axial) \
 				required if set; e.g., -s 312 384 330')
 parser.add_argument('-r', '--resample', action='store_true',
 		help='resample the first low-res image in the high-res lattice \
