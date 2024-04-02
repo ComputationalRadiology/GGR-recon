@@ -103,6 +103,8 @@ if sz == None:
 else:
 	img0x = resample_iso_img_with_size(img0, sz)
 
+sz = img0x.GetSize() # update the variable of image size
+
 # =========== Print summary of the execution =============
 mode = 'Preprocessing'
 if resample_only:
