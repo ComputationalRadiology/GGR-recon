@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import numpy as np
 import SimpleITK as sitk
 from scipy.io import loadmat, savemat
@@ -24,7 +26,7 @@ parser.add_argument('-f', '--format', nargs='+', default='.nii.gz',
 				e.g., -f .nhdr .nrrd .nii .nii.gz')
 parser.add_argument('-s', '--size', nargs='+', type=int,
 		help='size of the high-res reconstruction, optional; \
-				3 positive integers (sagittal coronal axial) \
+				3 even positive integers (sagittal coronal axial) \
 				required if set; e.g., -s 312 384 330')
 parser.add_argument('-r', '--resample', action='store_true',
 		help='resample the first low-res image in the high-res lattice \
@@ -101,8 +103,10 @@ if sz == None:
 else:
 	img0x = resample_iso_img_with_size(img0, sz)
 
+sz = img0x.GetSize() # update the variable of image size
+
 # =========== Print summary of the execution =============
-mode = 'Preprecessing'
+mode = 'Preprocessing'
 if resample_only:
 	mode = 'Resampling'
 table = Table(title='Summary of %s/preprocess.py execution' % app_name,
@@ -211,7 +215,7 @@ for ii in track(range(0, n_imgs), '[cyan]Creating filters...'):
 	savemat(working_path+'h_'+img_fn[ii]+'.mat', {'fft_win': fft_win})
 
 #print('completed step 3')
-#print('\t- create fitlers for deconvolution')
+#print('\t- create filters for deconvolution')
 
 # step 4: volume fusion
 z = sitk.GetArrayFromImage(img0x)
@@ -230,7 +234,7 @@ imwrite(img_z, out_path + 'img_mean' + img_ext[0])
 #print('completd step 4')
 #print('\t- volume fusion')
 
-rainbow = RainbowHighlighter()
+# rainbow = RainbowHighlighter()
 console.print('\n')
-console.print(rainbow('ALL THE PRE-PRECESSINGS HAVE BEEN COMPLATED'))
+console.print('THE PRE-PROCESSING HAS BEEN COMPLETED.')
 console.print('\n')

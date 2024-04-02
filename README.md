@@ -55,10 +55,7 @@ export DYLD_LIBRARY_PATH=""
 ```console
 docker run -it --rm --name ggr your-ggr-tag preprocess.py -h
 ```
-#### Python mode
-```console
-python preprocess.py -h
-```
+
 ```
 usage: preprocess.py [-h] [-V] [-f FORMAT [FORMAT ...]] [-s SIZE [SIZE ...]]
                      [-r]
@@ -82,10 +79,8 @@ optional arguments:
 ```console
 docker run -it --rm --name ggr your-ggr-tag recon.py -h
 ```
-#### Python mode
-```console
-python recon.py -h
-```
+
+
 ```
 usage: recon.py [-h] [-V] [--ggr | --tik] [-w REG_WEIGHT]
 
@@ -175,6 +170,18 @@ Then, build your docker image with the proxy arguemnt by
 ```
 docker build --build-arg http_proxy=http://your.proxy.edu:3128 -t your-ggr-tag .
 ```
+
+or build your docker image with the build computer network:
+```
+docker build --network=host  -t crl/ggr-recon .
+```
+
+
+Build command without proxy:
+```
+docker build  -t crl/ggr-recon .
+```
+
 
 ## References
   1. Yao Sui, Onur Afacan, Ali Gholipour, and Simon K. Warfield. 2019. “**Isotropic MRI Super-Resolution Reconstruction with Multi-Scale Gradient Field Prior**.” *International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI)*. Shen Zhen, China. <a href="https://scholar.harvard.edu/files/suiyao/files/sui_miccai_2019.pdf">PDF</a>

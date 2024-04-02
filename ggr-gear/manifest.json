@@ -1,0 +1,60 @@
+{
+    "name": "ggr-gear",
+    "label": "Gradient Guidance Regularization Gear",
+    "description": "A deconvolution-based MRI super-resolution reconstruction method with a gradient guidance regularization (GGR) gear",
+    "version": "1.0.0_1.0.4",
+    "author":  "Yao Sui, gear: Nick Leung",
+    "maintainer":  "Nick Leung",
+    "cite":  "",
+    "license": "Apache-2.0",
+    "url": "https://github.com/suiyao/GGR-recon",
+    "source":  "https://github.com/suiyao/GGR-recon",
+    "environment": {
+      "FLYWHEEL":"/flywheel/v0",
+      "VTK_INSTALL_DIR": "/opt/vtk",
+      "VTK_DIR": "/opt/vtk/lib/cmake/vtk-9.1",
+      "ITK_INSTALL_DIR": "/opt/itk",
+      "ITK_DIR": "/opt/itk/lib/cmake/ITK-4.13",
+      "NLOPT_INSTALL_DIR": "/opt/nlopt",
+      "NLOPT_DIR": "/opt/nlopt/lib/cmake/nlopt",
+      "CRKIT_INSTALL_DIR": "/opt/crkit",
+      "LD_LIBRARY_PATH": "/opt/crkit/crkit-1.6.0/itk-4.6.1/lib:/opt/vtk/lib:/opt/itk/lib",
+      "PATH": "/opt/crkit/crkit-1.6.0/bin/:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    },
+    "config": {
+    },
+    "command": "python3 run.py",
+    "inputs": {
+      "niftifileone": {
+        "base": "file",
+        "type": { "enum": [ "nifti" ] },
+        "description": "nifti file 1 with raw reconstruction data"
+      },
+
+      "niftifiletwo": {
+        "base": "file",
+        "type": { "enum": [ "nifti" ] },
+        "description": "nifti file 2 with raw reconstruction data"
+      },
+
+      "niftifilethree": {
+        "base": "file",
+        "type": { "enum": [ "nifti" ] },
+        "description": "nifti file 3 with raw reconstruction data"
+      },
+
+      "key": {
+        "base": "api-key",
+        "read-only": true
+      }
+    },
+    "custom": {
+      "gear-builder": {
+        "category": "analysis",
+        "image": "ggr-gear:latest"
+      },
+      "flywheel": {
+        "suite": "CRKit"
+      }
+    }
+  }
