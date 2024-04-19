@@ -32,6 +32,9 @@ parser.add_argument('-r', '--resample', action='store_true',
 		help='resample the first low-res image in the high-res lattice \
 				and then exit. Usually used for determining a user \
 				defined size of the high-res reconstruction')
+parser.add_argument('-p', '--path', default='/opt/GGR-recon/data/')
+parser.add_argument('-w', '--working_path', default='/opt/GGR-recon/working/')
+parser.add_argument('-o', '--out_path', default='/opt/GGR-recon/recons/')
 args = parser.parse_args()
 sz = args.size
 resample_only = args.resample
@@ -55,9 +58,13 @@ if np.any([not fmt.startswith('.') for fmt in fn_ext]):
 	print('Error: each element of FORMAT should start with .(dot)')
 	exit()
 
-path = '/opt/GGR-recon/data/'
-working_path = '/opt/GGR-recon/working/'
-out_path = '/opt/GGR-recon/recons/'
+path = args.path
+working_path = args.working_path
+out_path = args.out_path
+
+print('path : ' + str(path))
+print('working_path : ' + str(working_path))
+print('out_path : ' + str(out_path))
 
 if not os.path.isdir(path):
 	print('Low-res images should be put in ./data')
@@ -85,15 +92,24 @@ if n_imgs == 0:
 console = Console()
 print_header(console)
 
-
-
 # step 0: make the orientations the same for all LR images
 for ii in range(0, n_imgs):
-	os.system('crlOrientImage %s%s%s %s%s%s' %
-			(path, img_fn[ii], img_ext[ii],
-				working_path, img_fn[ii], img_ext[ii]))
+  inputVolume = path + img_fn[ii] + img_ext[ii]
+  outputVolume = working_path + img_fn[ii] + img_ext[ii]
+  print(str(inputVolume))
+  print(str(outputVolume))
+  reader = sitk.ImageFileReader()
+  reader.SetFileName( inputVolume )
+  inputImage = reader.Execute();
+  # Now we clone the input image.
+  reorientedImage = sitk.DICOMOrient( inputImage, 'LPS' )
+  writer = sitk.ImageFileWriter()
+  writer.SetFileName( outputVolume )
+  writer.Execute( reorientedImage )
+
 #print('completed step 0')
 #print('\t- make the orientations the same for all LR images')
+
 
 # step 1: resample the images
 img0 = imread(working_path + img_fn[0] + img_ext[0])
@@ -191,7 +207,7 @@ for ii in track(range(0, n_imgs), '[cyan]Creating filters...'):
 			# FWHM in the unit of number of pixel and convert it to sigma
 			sigma = factor / 2.355
 			filter_len = sz[jj]
-			gw = signal.gaussian(filter_len, std=sigma)
+			gw = signal.windows.gaussian(filter_len, std=sigma)
 			gw /= np.sum(gw)
 			# put it onto 3D space
 			shape = np.ones(3, dtype=np.int64)
