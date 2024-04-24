@@ -159,6 +159,7 @@ direction = img0x.GetDirection()
 lr_size = np.zeros([3, n_imgs])
 lr_spacing = np.zeros([3, n_imgs])
 lr_size[:,0] = np.array(img0.GetSize(), dtype=np.int64)
+lr_size[lr_size[:,0]%2!=0,0] -= 1
 lr_spacing[:,0] = np.array(img0.GetSpacing())
 for ii in track(range(1, n_imgs), '[yellow]Resampling images...'):
 	img = imread(working_path + img_fn[ii] + img_ext[ii])
