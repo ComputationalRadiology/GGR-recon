@@ -6,8 +6,8 @@ from rich.panel import Panel
 from rich.highlighter import Highlighter
 
 app_name = 'GGR-recon'
-version = '0.9.1'
-release_date = '2024-01-29'
+version = '0.9.2'
+release_date = '2024-04-24'
 
 def print_header(console):
 	console.print('\n\n')
