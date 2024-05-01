@@ -22,7 +22,7 @@ parser.add_argument('-V', '--version', action='version',
 		help='show version')
 parser.add_argument('-f', '--filenames', nargs='+',
         help='filenames of input the low-res images; (full path required)\
-                e.g., -i a.nii.gz b.nii.gz c.nii.gz')
+                e.g., -f a.nii.gz b.nii.gz c.nii.gz')
 parser.add_argument('-s', '--size', nargs='+', type=int,
 		help='size of the high-res reconstruction, optional; \
 				3 even positive integers (sagittal coronal axial) \
