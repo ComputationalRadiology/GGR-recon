@@ -20,10 +20,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-V', '--version', action='version',
 		version='%s version : v %s %s' % (app_name, version, release_date),
 		help='show version')
-parser.add_argument('-f', '--format', nargs='+', default='.nii.gz',
-		help='formats of the low-res images, by default is .nii.gz; \
-				no repeated elements included; \
-				e.g., -f .nhdr .nrrd .nii .nii.gz')
+parser.add_argument('-f', '--filenames', nargs='+',
+        help='filenames of input the low-res images; (full path required)\
+                e.g., -i a.nii.gz b.nii.gz c.nii.gz')
 parser.add_argument('-s', '--size', nargs='+', type=int,
 		help='size of the high-res reconstruction, optional; \
 				3 even positive integers (sagittal coronal axial) \
@@ -36,29 +35,22 @@ parser.add_argument('-p', '--path', default='/opt/GGR-recon/data/')
 parser.add_argument('-w', '--working_path', default='/opt/GGR-recon/working/')
 parser.add_argument('-o', '--out_path', default='/opt/GGR-recon/recons/')
 args = parser.parse_args()
+flist = args.filenames
 sz = args.size
 resample_only = args.resample
 
-if sz != None and (len(sz) != 3 or np.any(np.array(sz) <= 0)):
+n_imgs = len(flist)
+
+if n_imgs == 0:
+	print('No image data found!')
+	exit()
+
+if sz != None and (len(sz) != n_imgs or np.any(np.array(sz) <= 0)):
 	print('SIZE =', sz)
 	print('Error: SIZE should comprise 3 positive integers')
 	exit()
 
-fn_ext = args.format
-if isinstance(fn_ext, str):
-	fn_ext = [fn_ext]
 
-if len(fn_ext) != len(np.unique(fn_ext)):
-	print('FORMAT =', fn_ext)
-	print('Error: elements of FORMAT should be unique')
-	exit()
-
-if np.any([not fmt.startswith('.') for fmt in fn_ext]):
-	print('FORMAT =', fn_ext)
-	print('Error: each element of FORMAT should start with .(dot)')
-	exit()
-
-path = args.path
 working_path = args.working_path
 out_path = args.out_path
 
@@ -66,9 +58,6 @@ print('path : ' + str(path))
 print('working_path : ' + str(working_path))
 print('out_path : ' + str(out_path))
 
-if not os.path.isdir(path):
-	print('Low-res images should be put in ./data')
-	exit()
 if not os.path.isdir(out_path):
 	os.mkdir(out_path)
 if not os.path.isdir(working_path):
@@ -76,25 +65,26 @@ if not os.path.isdir(working_path):
 
 flist = os.listdir(path)
 
+img_path = []
 img_fn = []
 img_ext = []
-for e in fn_ext:
-	img_fn += [f.rsplit(e, 1)[0] for f in flist if f.endswith(e)]
-	img_ext += [e] * len(img_fn)
 
-n_imgs = len(img_fn)
+for filename in flist:
+	(path, fn) = os.path.split(filename)
+	if not path.endswith('/'):
+		path += '/'
+	(fn, ext) = os.path.splitext(fn)
 
-if n_imgs == 0:
-	print('No image data found!')
-	exit()
-
+	img_path.append(path)
+	img_fn.append(fn)
+	img_ext.append(ext)
 
 console = Console()
 print_header(console)
 
 # step 0: make the orientations the same for all LR images
 for ii in range(0, n_imgs):
-  inputVolume = path + img_fn[ii] + img_ext[ii]
+  inputVolume = img_path[ii] + img_fn[ii] + img_ext[ii]
   outputVolume = working_path + img_fn[ii] + img_ext[ii]
   print(str(inputVolume))
   print(str(outputVolume))
