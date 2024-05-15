@@ -186,3 +186,9 @@ docker build  -t crl/ggr-recon .
 ## References
   1. Yao Sui, Onur Afacan, Ali Gholipour, and Simon K. Warfield. 2019. “**Isotropic MRI Super-Resolution Reconstruction with Multi-Scale Gradient Field Prior**.” *International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI)*. Shen Zhen, China. <a href="https://scholar.harvard.edu/files/suiyao/files/sui_miccai_2019.pdf">PDF</a>
   2. Yao Sui, Onur Afacan, Ali Gholipour, and Simon K. Warfield. 2020. “**Learning a Gradient Guidance for Spatially Isotropic MRI Super-Resolution Reconstruction**.” *International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI)*. Lima, Peru. <a href="https://scholar.harvard.edu/files/suiyao/files/sui_deepgg_miccai_2020.pdf">PDF</a>
+
+
+## Applications
+1. "**Super-resolution reconstruction of T2-weighted thick-slice neonatal brain MRI scans.**" Incebak et al. 2002. PMID: 34506677 PMCID: PMC8752487 DOI: 10.1111/jon.12929  https://pubmed.ncbi.nlm.nih.gov/34506677/
+
+   This paper examined the use of this type of super-resolution for imaging of neonates. Qualitative and quantitative assessments showed that 3D SRR of several LR images produces images that are of comparable quality to standard 2D HR image acquisition for healthy neonatal imaging without loss of anatomical details with similar edge definition allowing the detection of fine anatomical structures and permitting comparable morphometric measurement.
