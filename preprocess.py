@@ -72,10 +72,9 @@ img_ext = []
 for filename in flist:
     base, first_dot, rest = filename.partition('.')
     filename = filename.with_name(base)
-
-	img_path.append(base)
-	img_fn.append(filename)
-	img_ext.append(rest)
+    img_path.append(base)
+    img_fn.append(filename)
+    img_ext.append(rest)
 
 console = Console()
 print_header(console)
