@@ -70,14 +70,12 @@ img_ext = []
 
 
 for filename in flist:
-	(path, fn) = os.path.split(filename)
-	if not path.endswith('/'):
-		path += '/'
-	(fn, ext) = os.path.splitext(fn)
+    base, first_dot, rest = filename.partition('.')
+    filename = filename.with_name(base)
 
-	img_path.append(path)
-	img_fn.append(fn)
-	img_ext.append(ext)
+	img_path.append(base)
+	img_fn.append(filename)
+	img_ext.append(rest)
 
 console = Console()
 print_header(console)
