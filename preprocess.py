@@ -20,13 +20,14 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-V', '--version', action='version',
 		version='%s version : v %s %s' % (app_name, version, release_date),
 		help='show version')
+
 parser.add_argument('-f', '--filenames', nargs='+',
         help='filenames of input the low-res images; (full path required)\
                 e.g., -f a.nii.gz b.nii.gz c.nii.gz')
 parser.add_argument('-s', '--size', nargs='+', type=int,
 		help='size of the high-res reconstruction, optional; \
-				3 even positive integers (sagittal coronal axial) \
-				required if set; e.g., -s 312 384 330')
+				even positive integers required if set; \
+                e.g., -s 312 384 330')
 parser.add_argument('-r', '--resample', action='store_true',
 		help='resample the first low-res image in the high-res lattice \
 				and then exit. Usually used for determining a user \
@@ -47,10 +48,10 @@ if n_imgs == 0:
 
 if sz != None and (len(sz) != n_imgs or np.any(np.array(sz) <= 0)):
 	print('SIZE =', sz)
-	print('Error: SIZE should comprise 3 positive integers')
+	print('Error: SIZE should comprise positive integers')
 	exit()
 
-
+path = args.path
 working_path = args.working_path
 out_path = args.out_path
 
@@ -63,11 +64,10 @@ if not os.path.isdir(out_path):
 if not os.path.isdir(working_path):
 	os.mkdir(working_path)
 
-flist = os.listdir(path)
-
 img_path = []
 img_fn = []
 img_ext = []
+
 
 for filename in flist:
 	(path, fn) = os.path.split(filename)
