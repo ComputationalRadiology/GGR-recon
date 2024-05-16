@@ -71,7 +71,7 @@ img_ext = []
 
 
 for filename in flist:
-    fpname =  pathlib.PurePosixPath(fname)
+    fpname =  pathlib.PurePosixPath(filename)
     base, first_dot, rest = fpname.name.partition('.')
     filename = filename.with_name(base)
     img_path.append( str(fpname.parent) )
