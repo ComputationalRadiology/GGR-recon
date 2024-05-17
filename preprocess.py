@@ -73,10 +73,13 @@ img_ext = []
 for filename in flist:
     fpname =  pathlib.PurePosixPath(filename)
     base, first_dot, rest = fpname.name.partition('.')
-    filename = filename.with_name(base)
-    img_path.append( str(fpname.parent) )
+    #filename = filename.with_name(base)
+    p = str(fpname.parent)
+    if not p.endswith('/'):
+        p += '/'
+    img_path.append( p )
     img_fn.append( str(base) )
-    img_ext.append( str(rest) )
+    img_ext.append( '.'+str(rest) )
 
 console = Console()
 print_header(console)
