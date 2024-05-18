@@ -7,6 +7,7 @@ from scipy import signal
 import os
 import time
 import argparse
+import pathlib
 
 from utils import *
 
@@ -70,14 +71,15 @@ img_ext = []
 
 
 for filename in flist:
-	(path, fn) = os.path.split(filename)
-	if not path.endswith('/'):
-		path += '/'
-	(fn, ext) = os.path.splitext(fn)
-
-	img_path.append(path)
-	img_fn.append(fn)
-	img_ext.append(ext)
+    fpname =  pathlib.PurePosixPath(filename)
+    base, first_dot, rest = fpname.name.partition('.')
+    #filename = filename.with_name(base)
+    p = str(fpname.parent)
+    if not p.endswith('/'):
+        p += '/'
+    img_path.append( p )
+    img_fn.append( str(base) )
+    img_ext.append( '.'+str(rest) )
 
 console = Console()
 print_header(console)
